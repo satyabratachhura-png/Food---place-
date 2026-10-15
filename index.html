@@ -4,95 +4,209 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Food Palace | Order Online</title>
+
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#fffaf2;color:#292929}
-header{background:#e85d04;color:white;text-align:center;padding:24px 12px}
-header h1{margin:0;font-size:32px}
-.hero{text-align:center;padding:28px 15px;background:#ffe8cc}
-.hero h2{color:#c2410c}
-.menu{display:flex;flex-wrap:wrap;justify-content:center;gap:15px;padding:18px}
-.item{background:white;width:155px;padding:12px;border-radius:14px;text-align:center;box-shadow:0 3px 12px #ddd}
-.food{font-size:55px}
-.item h3{margin:8px 0}
-.price{font-weight:bold;color:#e85d04;font-size:19px}
-button{background:#e85d04;color:white;border:0;padding:10px;border-radius:8px;cursor:pointer}
-.order{margin:20px auto;padding:20px;max-width:500px;background:white;border-radius:14px;box-shadow:0 3px 12px #ddd}
-input,textarea{width:100%;padding:12px;margin:7px 0;border:1px solid #ccc;border-radius:8px}
-#cart{line-height:1.8}
-footer{text-align:center;background:#292929;color:white;padding:18px;margin-top:25px}
+body{margin:0;font-family:Arial,sans-serif;background:#fffaf4;color:#171717}
+header{background:#111;color:white;padding:18px 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.logo{font-size:27px;font-weight:bold;color:#ff7900}
+header a{color:white;text-decoration:none;margin:8px}
+.hero{background:linear-gradient(90deg,#111c,#1118),url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1400&q=85') center/cover;color:white;padding:65px 6%;min-height:330px}
+.hero h1{font-size:clamp(38px,7vw,65px);margin:12px 0;color:#ff8500}
+.hero p{font-size:18px;max-width:450px}
+.btn{background:#ff7900;color:white;border:0;border-radius:9px;padding:12px 17px;font-weight:bold;cursor:pointer}
+.section{padding:28px 5%}
+.categories{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+.categories span{background:#fff0e2;padding:12px 18px;border-radius:12px}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:22px;align-items:start}
+.menu{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.card{background:white;border:1px solid #eee;border-radius:13px;overflow:hidden;box-shadow:0 3px 12px #0000000c}
+.card img{width:100%;height:125px;object-fit:cover;display:block}
+.info{padding:11px}
+.info h3{margin:3px 0 8px;font-size:16px}
+.price{color:#ed5b00;font-weight:bold;font-size:19px;margin:8px 0}
+.info button{width:100%;font-size:13px;padding:10px 3px}
+.cart{background:white;border:1px solid #eee;border-radius:14px;padding:17px;position:sticky;top:10px}
+.cart h2{margin-top:0}
+.cart-row{padding:10px 0;border-bottom:1px solid #eee;font-size:14px}
+.qty button{padding:4px 9px;margin:4px}
+input,textarea{width:100%;padding:12px;margin:6px 0;border:1px solid #ddd;border-radius:8px;font:inherit}
+.cart .checkout{width:100%;background:#078b45;margin-top:10px}
+.about{background:#151515;color:white;border-radius:14px;padding:25px;margin-top:25px}
+.about h2{color:#ff8500}
+.features{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;text-align:center;padding:25px 5%}
+.features div{background:#fff0e2;padding:16px;border-radius:12px}
+footer{background:#111;color:#ddd;text-align:center;padding:24px}
+@media(max-width:900px){
+.layout{grid-template-columns:1fr}
+.menu{grid-template-columns:repeat(2,minmax(0,1fr))}
+.cart{position:static}
+.features{grid-template-columns:repeat(2,1fr)}
+}
+@media(min-width:901px) and (max-width:1150px){
+.menu{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
 </style>
 </head>
+
 <body>
 <header>
-<h1 id="restaurantName">🍴 Food Palace</h1>
-<p>Delicious Food • Freshly Made • Quick Ordering</p>
+<div class="logo" id="logo">🍴 Food Palace</div>
+<nav>
+<a href="#home">Home</a>
+<a href="#menu">Menu</a>
+<a href="#about">About</a>
+</nav>
 </header>
-<section class="hero">
-<h2>Good Food, Good Mood! 😋</h2>
-<p>Choose your favourite food and order on WhatsApp.</p>
+
+<section class="hero" id="home">
+<p>WELCOME TO OUR RESTAURANT</p>
+<h1 id="heroName">Food Palace</h1>
+<p>Delicious food, freshly made. Choose your favourite meal and order easily on WhatsApp!</p>
+<a href="#menu"><button class="btn">Explore Our Menu →</button></a>
 </section>
-<section class="menu">
-<div class="item"><div class="food">🍕</div><h3>Pizza</h3><p class="price">₹149</p><button onclick="add('Pizza',149)">Add to Cart</button></div>
-<div class="item"><div class="food">🍔</div><h3>Burger</h3><p class="price">₹79</p><button onclick="add('Burger',79)">Add to Cart</button></div>
-<div class="item"><div class="food">🍜</div><h3>Noodles</h3><p class="price">₹99</p><button onclick="add('Noodles',99)">Add to Cart</button></div>
-<div class="item"><div class="food">🥟</div><h3>Samosa</h3><p class="price">₹15</p><button onclick="add('Samosa',15)">Add to Cart</button></div>
-<div class="item"><div class="food">🍟</div><h3>French Fries</h3><p class="price">₹69</p><button onclick="add('French Fries',69)">Add to Cart</button></div>
-<div class="item"><div class="food">🥪</div><h3>Sandwich</h3><p class="price">₹59</p><button onclick="add('Sandwich',59)">Add to Cart</button></div>
-</section>
-<section class="order">
+
+<section class="section" id="menu">
+<h2>🍽️ Explore Our Menu</h2>
+<div class="categories">
+<span>🍕 Pizza</span><span>🍔 Burgers</span><span>🍛 Biryani</span><span>🍜 Chinese</span><span>🥤 Drinks</span>
+</div>
+
+<div class="layout">
+<div class="menu" id="menuItems"></div>
+
+<aside class="cart">
 <h2>🛒 Your Order</h2>
-<div id="cart">No items added yet.</div>
+<div id="cartItems">No items added yet.</div>
 <h3 id="total">Total: ₹0</h3>
 <input id="customer" placeholder="Your name">
-<textarea id="address" placeholder="Delivery address"></textarea>
-<button onclick="sendOrder()">Order on WhatsApp</button>
-<p><small>WhatsApp par order bhejne ke liye Send dabana hoga.</small></p>
+<textarea id="address" rows="2" placeholder="Delivery address"></textarea>
+<button class="btn checkout" onclick="sendOrder()">🟢 Order on WhatsApp</button>
+<p style="font-size:12px;color:#666">Your order will open in WhatsApp for confirmation.</p>
+</aside>
+</div>
+
+<div class="about" id="about">
+<h2>About <span id="aboutName">Food Palace</span></h2>
+<p>We serve delicious food made with care. Visit us with your family and friends or order your favourites online.</p>
+<p>📍 Restaurant address: Add your address here</p>
+<p>🕒 Opening hours: 10 AM – 10 PM</p>
+</div>
 </section>
-<footer>Thank you for visiting us ❤️</footer>
+
+<section class="features">
+<div>🥗<h3>Fresh Food</h3><p>Quality ingredients</p></div>
+<div>🛵<h3>Quick Service</h3><p>Easy ordering</p></div>
+<div>💳<h3>Easy Payment</h3><p>Confirm with restaurant</p></div>
+<div>💬<h3>WhatsApp</h3><p>Direct contact</p></div>
+</section>
+
+<footer>
+<h2 id="footerName">🍴 Food Palace</h2>
+<p>Good Food • Great Mood ❤️</p>
+<p>© <span id="year"></span> <span id="copyrightName">Food Palace</span>. All rights reserved.</p>
+</footer>
+
 <script>
-const restaurant={
-name:"Food Palace",
-whatsapp:"919876543210"
+// CHANGE THESE TWO DETAILS FOR EACH RESTAURANT
+const restaurant = {
+  name: "Food Palace",
+  whatsapp: "919876543210"
 };
-document.getElementById("restaurantName").textContent="🍴 "+restaurant.name;
-let cart={};
-function add(name,price){
-if(!cart[name])cart[name]={price:price,qty:0};
-cart[name].qty++;
-render();
+
+// Change menu names, prices and photos here
+const foods = [
+ {name:"Pizza",price:149,emoji:"🍕",image:"https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=500&q=80"},
+ {name:"Burger",price:79,emoji:"🍔",image:"https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=500&q=80"},
+ {name:"Chicken Biryani",price:120,emoji:"🍛",image:"https://images.unsplash.com/photo-1563379091339-03246963d96c?auto=format&fit=crop&w=500&q=80"},
+ {name:"Veg Noodles",price:99,emoji:"🍜",image:"https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=500&q=80"},
+ {name:"Samosa",price:15,emoji:"🥟",image:"https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=500&q=80"},
+ {name:"French Fries",price:69,emoji:"🍟",image:"https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=500&q=80"},
+ {name:"Sandwich",price:59,emoji:"🥪",image:"https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=500&q=80"},
+ {name:"Cold Coffee",price:69,emoji:"🥤",image:"https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=500&q=80"}
+];
+
+document.title=restaurant.name+" | Order Online";
+["logo","heroName","aboutName","footerName","copyrightName"].forEach(id=>{
+ const el=document.getElementById(id);
+ if(id==="logo"||id==="footerName") el.textContent="🍴 "+restaurant.name;
+ else el.textContent=restaurant.name;
+});
+document.getElementById("year").textContent=new Date().getFullYear();
+
+const cart={};
+const menu=document.getElementById("menuItems");
+
+foods.forEach((food,index)=>{
+ const card=document.createElement("div");
+ card.className="card";
+ card.innerHTML=`
+ <img src="${food.image}" alt="${food.name}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+ <div style="display:none;font-size:55px;text-align:center;padding:20px">${food.emoji}</div>
+ <div class="info">
+ <h3>${food.name}</h3>
+ <div class="price">₹${food.price}</div>
+ <button class="btn" onclick="addItem(${index})">＋ Add to Cart</button>
+ </div>`;
+ menu.appendChild(card);
+});
+
+function addItem(index){
+ const food=foods[index];
+ if(!cart[index])cart[index]={...food,qty:0};
+ cart[index].qty++;
+ renderCart();
 }
-function change(name,amount){
-cart[name].qty+=amount;
-if(cart[name].qty<=0)delete cart[name];
-render();
+
+function changeQty(index,amount){
+ if(!cart[index])return;
+ cart[index].qty+=amount;
+ if(cart[index].qty<=0)delete cart[index];
+ renderCart();
 }
-function render(){
-let html="",sum=0;
-for(let name in cart){
-let item=cart[name];
-sum+=item.price*item.qty;
-html+=name+" — ₹"+item.price+" × "+item.qty+
-' <button onclick="change(\''+name+'\',-1)">−</button> '+
-'<button onclick="change(\''+name+'\',1)">+</button><br>';
+
+function renderCart(){
+ let html="",total=0;
+ Object.keys(cart).forEach(key=>{
+ const item=cart[key];
+ total+=item.price*item.qty;
+ html+=`<div class="cart-row">
+ <strong>${item.name}</strong><br>
+ ₹${item.price} × ${item.qty}
+ <span class="qty">
+ <button onclick="changeQty(${key},-1)">−</button>
+ <button onclick="changeQty(${key},1)">＋</button>
+ </span>
+ </div>`;
+ });
+ document.getElementById("cartItems").innerHTML=html||"No items added yet.";
+ document.getElementById("total").textContent="Total: ₹"+total;
 }
-document.getElementById("cart").innerHTML=html||"No items added yet.";
-document.getElementById("total").textContent="Total: ₹"+sum;
-}
+
 function sendOrder(){
-if(!Object.keys(cart).length){alert("Please add food to cart first.");return;}
-let customer=document.getElementById("customer").value.trim();
-let address=document.getElementById("address").value.trim();
-if(!customer||!address){alert("Please enter your name and address.");return;}
-let msg="New Order - "+restaurant.name+"\nName: "+customer+"\nAddress: "+address+"\n";
-let total=0;
-for(let name in cart){
-let item=cart[name];
-msg+=name+" x "+item.qty+" = ₹"+(item.price*item.qty)+"\n";
-total+=item.price*item.qty;
-}
-msg+="Total: ₹"+total;
-window.open("https://wa.me/"+restaurant.whatsapp+"?text="+encodeURIComponent(msg),"_blank");
+ if(!Object.keys(cart).length){
+  alert("Please add food to your cart first.");
+  return;
+ }
+ const customer=document.getElementById("customer").value.trim();
+ const address=document.getElementById("address").value.trim();
+ if(!customer||!address){
+  alert("Please enter your name and delivery address.");
+  return;
+ }
+ if(!/^\d{10,15}$/.test(restaurant.whatsapp)){
+  alert("Please set the restaurant WhatsApp number in the code.");
+  return;
+ }
+ let message="New order for "+restaurant.name+"\n";
+ message+="Customer: "+customer+"\nAddress: "+address+"\n\n";
+ let total=0;
+ Object.values(cart).forEach(item=>{
+  message+=item.name+" x "+item.qty+" = ₹"+(item.price*item.qty)+"\n";
+  total+=item.price*item.qty;
+ });
+ message+="\nTotal: ₹"+total;
+ window.open("https://wa.me/"+restaurant.whatsapp+"?text="+encodeURIComponent(message),"_blank");
 }
 </script>
 </body>
